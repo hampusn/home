@@ -1,15 +1,19 @@
 <% content_for :title do %>My super sweet index dashboard<% end %>
 <div class="gridster">
   <ul>
-    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
-      <div data-id="weather" data-view="Weather"></div>
-    </li>
-
-    <li data-row="1" data-col="2" data-sizex="1" data-sizey="1">
-      <div data-id="google_calendar" data-view="GoogleCalendar"></div>
+    <li data-row="1" data-col="1" data-sizex="2" data-sizey="1">
+      <div data-id="elks_single_sms" data-view="ElksSingleSms" data-title="Hello" data-text="This is your shiny new dashboard." data-moreinfo="Protip: You can drag the widgets around!"></div>
     </li>
 
     <li data-row="2" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="weather" data-view="Weather"></div>
+    </li>
+<!--!
+    <li data-row="2" data-col="2" data-sizex="1" data-sizey="1">
+      <div data-id="google_calendar" data-view="GoogleCalendar"></div>
+    </li>
+-->
+    <li data-row="3" data-col="1" data-sizex="1" data-sizey="1">
       <div data-id="synergy" data-view="Meter" data-title="Synergy" data-min="0" data-max="100"></div>
     </li>
 
