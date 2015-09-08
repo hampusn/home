@@ -1,17 +1,29 @@
 require 'net/http'
 require 'uri'
+require 'json'
 
 # URI to SMS cache endpoint
-cache_uri = URI.parse(ENV['ELKS_SINGLE_SMS_CACHE_URI'] || 'http://user:pass@localhost:5000/sms?channel=test-channel')
-
+cache_uri = URI(ENV['ELKS_SINGLE_SMS_CACHE_URI'] || 'http://user:pass@localhost:5000/sms?channel=test-channel')
 
 SCHEDULER.every '10s', :first_in => 0 do |job|
-  response = Net::HTTP.get(cache_uri)
+  # Create request
+  req = Net::HTTP::Get.new(cache_uri)
+  # Set Basic Auth from cache uri
+  req.basic_auth cache_uri.user, cache_uri.password
+  # Send request
+  res = Net::HTTP.start(cache_uri.hostname, cache_uri.port) { |http|
+    http.request(req)
+  }
 
-  puts response
+  if res && res.body
+    json_response = JSON.parse(res.body)
+    sms = json_response['items'][0]
 
-#  send_event('weather', { :temp => "#{weather_data['temp']}&deg;#{format.upcase}",
- #                         :condition => weather_data['text'],
-  #                        :title => "#{weather_location['city']}",
-   #                       :climacon => climacon_class(weather_data['code'])})
+    send_event('elks_single_sms', {
+      message: sms['message'],
+      from: sms['from'],
+      to: sms['to'],
+      time: sms['created_at']
+    });
+  end
 end
