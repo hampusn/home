@@ -1,3 +1,9 @@
+require 'dotenv'
+# Load .env file which contains environment variables 
+# Heroku handles this automagically but since I wan't to develop locally 
+# and Dashing requires `dashing start` I can't use `heroku local`. Sad panda :(
+Dotenv.load
+
 require 'dashing'
 
 configure do
