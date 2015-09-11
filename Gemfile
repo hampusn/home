@@ -4,6 +4,9 @@ ruby '2.2.3'
 gem 'dashing'
 gem 'dotenv'
 
+## Passes ruby information to view as accessible javascript variables
+gem 'gon-sinatra'
+
 ## Needed for Weather widget
 gem 'xml-simple'
 

@@ -8,6 +8,10 @@
 console.log("Yeah! The dashboard has started!")
 
 Dashing.on 'ready', ->
+  # Setup momentJS locale if locale exists
+  if moment && gon.locale
+    moment.locale(gon.locale)
+
   Dashing.widget_margins ||= [4, 4]
   Dashing.widget_base_dimensions ||= [298, 338]
   Dashing.numColumns ||= 2
