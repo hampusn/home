@@ -26,6 +26,8 @@ GEM
     execjs (2.0.2)
     faraday (0.9.1)
       multipart-post (>= 1.2, < 3)
+    gon-sinatra (0.1.2)
+      sinatra
     hike (1.2.3)
     http (0.6.4)
       http_parser.rb (~> 0.6.0)
@@ -89,6 +91,7 @@ PLATFORMS
 DEPENDENCIES
   dashing
   dotenv
+  gon-sinatra
   twitter (>= 5.9.0)
   xml-simple
 
