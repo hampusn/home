@@ -1,0 +1,4 @@
+en:
+  widgets:
+    elks_single_sms:
+      from: "Recieved from %phone_number"

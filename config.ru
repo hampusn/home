@@ -4,6 +4,9 @@ require 'dotenv'
 # and Dashing requires `dashing start` I can't use `heroku local`. Sad panda :(
 Dotenv.load
 
+require 'i18n'
+require 'i18n/backend/fallbacks'
+
 # Helper gem to pass ruby variables to dashboard for use in javascript
 require 'gon-sinatra'
 
@@ -13,6 +16,11 @@ require 'dashing'
 configure do
   set :auth_token, ENV['AUTH_TOKEN'] ||  'AUTH_TOKEN'
   set :default_dashboard, 'index'
+
+  I18n::Backend::Simple.send(:include, I18n::Backend::Fallbacks)
+  I18n.load_path = Dir[File.join(settings.root, 'locales', '*.yml')]
+  I18n.backend.load_translations
+  I18n.enforce_available_locales = false
 
 
   helpers do
@@ -26,8 +34,17 @@ end
 before '/:dashboard' do
   if params[:dashboard] == 'index'
     locale = ENV['LOCALE'] || 'en'
+    I18n.default_locale = 'en'
+    I18n.locale = locale
 
     gon.locale = locale
+
+    # Localization strings for widgets
+    gon.widgets = {
+      elks_single_sms: {
+        from: I18n.t('widgets.elks_single_sms.from')
+      }
+    }
   end
 end
 

@@ -1,0 +1,4 @@
+sv:
+  widgets:
+    elks_single_sms:
+      from: "Mottaget från %phone_number"
