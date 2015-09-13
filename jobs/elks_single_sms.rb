@@ -4,7 +4,7 @@ require 'json'
 require 'time'
 
 # URI to SMS cache endpoint
-cache_uri = URI(ENV['ELKS_SINGLE_SMS_CACHE_URI'] || 'http://user:pass@localhost:5000/sms?channel=test-channel')
+cache_uri = URI(ENV['ELKS_SINGLE_SMS_CACHE_URI'] || 'http://user:pass@localhost:5000/sms?channel=test-channel&n=1')
 
 SCHEDULER.every '10s', :first_in => 0 do |job|
   # Create request
