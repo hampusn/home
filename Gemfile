@@ -3,6 +3,7 @@ ruby '2.2.3'
 
 gem 'dashing'
 gem 'dotenv'
+gem 'i18n'
 
 ## Passes ruby information to view as accessible javascript variables
 gem 'gon-sinatra'

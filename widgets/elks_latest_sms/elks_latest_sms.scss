@@ -1,0 +1,56 @@
+// ----------------------------------------------------------------------------
+// Sass declarations
+// ----------------------------------------------------------------------------
+$background-color:  #12b0c5;
+
+$title-color:       rgba(255, 255, 255, 0.7);
+$moreinfo-color:    rgba(255, 255, 255, 0.7);
+
+// ----------------------------------------------------------------------------
+// Sass declarations
+// ----------------------------------------------------------------------------
+@function elks-latest-sms-message-font-size($i) {
+  @return 1em - 0.1em * ($i - 1) * 0.5 * $i;
+}
+
+// ----------------------------------------------------------------------------
+// Widget-elks-latest-sms styles
+// ----------------------------------------------------------------------------
+.widget-elks-latest-sms {
+  background-color: $background-color;
+  position: relative;
+
+  .messages {
+    font-size: 1.1em; 
+  }
+    .message {
+      font-size: elks-latest-sms-message-font-size(4);
+      line-height: 1;
+      margin-bottom: 0.5em; 
+    }
+      .message__text {}
+      .message__meta {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 0.8em;
+      }
+        .message__from {}
+        .message__time {}
+
+    @for $i from 1 through 3 {
+      .message:nth-child(#{$i}) {
+        font-size: elks-latest-sms-message-font-size($i);
+      }
+    }
+  
+  .to {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.6em; 
+    position: absolute;
+    right: 0.5em;
+    top: 0.5em;
+  }
+
+  .updated-at {
+    color: rgba(255, 255, 255, 0.7);
+  }
+}

@@ -1,0 +1,13 @@
+<ul class="messages">
+  <li class="message" data-foreach-item="items">
+    <p class="message__text" data-bind="item.message"></p>
+    <small class="message__meta">
+      <span class="message__from" data-bind="item.from"></span>,
+      <span class="message_time" data-bind="item.time"></span>
+    </small>
+  </li>
+</ul>
+
+<p class="to" data-bind="to"></p>
+
+<p class="updated-at" data-bind="updatedAtMessage"></p>
