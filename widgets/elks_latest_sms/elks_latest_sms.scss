@@ -7,6 +7,13 @@ $title-color:       rgba(255, 255, 255, 0.7);
 $moreinfo-color:    rgba(255, 255, 255, 0.7);
 
 // ----------------------------------------------------------------------------
+// Sass declarations
+// ----------------------------------------------------------------------------
+@function elks-latest-sms-message-font-size($i) {
+  @return 1em - 0.1em * ($i - 1) * 0.5 * $i;
+}
+
+// ----------------------------------------------------------------------------
 // Widget-elks-latest-sms styles
 // ----------------------------------------------------------------------------
 .widget-elks-latest-sms {
@@ -17,7 +24,7 @@ $moreinfo-color:    rgba(255, 255, 255, 0.7);
     font-size: 1.1em; 
   }
     .message {
-      font-size: 0.7em;
+      font-size: elks-latest-sms-message-font-size(4);
       line-height: 1;
       margin-bottom: 0.5em; 
     }
@@ -31,7 +38,7 @@ $moreinfo-color:    rgba(255, 255, 255, 0.7);
 
     @for $i from 1 through 3 {
       .message:nth-child(#{$i}) {
-        font-size: 1em - 0.1em * ($i - 1);
+        font-size: elks-latest-sms-message-font-size($i);
       }
     }
   
