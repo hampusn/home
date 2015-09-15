@@ -140,10 +140,12 @@ h3 {
   width: 100%;
   display: table;
   cursor: pointer;
+  overflow: hidden;
 }
 
 .widget {
   padding: 25px 12px;
+  position: relative;
   text-align: center;
   width: 100%;
   display: table-cell;
@@ -241,10 +243,6 @@ h3 {
     width:100%;
     background: #000;
     display: none;
-}
-
-#container {
-  padding-top: 5px;
 }
 
 

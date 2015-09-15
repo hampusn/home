@@ -5,6 +5,7 @@ class Dashing.ClickableWidget extends Dashing.Widget
     $(@node).on 'touchstart', (evt) => @handleTouchStart evt
     $(@node).on 'touchmove', (evt) => @handleTouchMove evt
     $(@node).on 'touchend', (evt) => @handleTouchEnd evt
+    $(@node).on 'tap', (evt) => @handleTap evt
 
   handleClick: (evt) ->
     @onClick evt
@@ -20,6 +21,9 @@ class Dashing.ClickableWidget extends Dashing.Widget
     @onTouchEnd evt
     @onClick evt
 
+  handleTap: (evt) ->
+    @onTap evt
+
   onClick: (evt) ->
     # override for click events
 
@@ -31,3 +35,6 @@ class Dashing.ClickableWidget extends Dashing.Widget
 
   onTouchEnd: (evt) ->
     # override for touchend events
+
+  onTap: (evt) ->
+    # override for tap events

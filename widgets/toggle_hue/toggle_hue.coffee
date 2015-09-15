@@ -25,7 +25,6 @@ class Dashing.ToggleHue extends Dashing.ClickableWidget
   onData: (data) ->
     @set 'state', data.state
 
-    
-  onClick: (event) ->
+  onTap: (event) ->
     newState = if @get('state') == 'on' then 'off' else 'on'
     @setState(newState);
