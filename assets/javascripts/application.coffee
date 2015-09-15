@@ -7,6 +7,9 @@
 
 console.log("Yeah! The dashboard has started!")
 
+$ ->
+  FastClick.attach(document.body);
+
 Dashing.on 'ready', ->
   # Setup momentJS locale if locale exists
   if moment && gon.locale
