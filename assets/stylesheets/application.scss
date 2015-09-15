@@ -140,6 +140,7 @@ h3 {
   width: 100%;
   display: table;
   cursor: pointer;
+  overflow: hidden;
 }
 
 .widget {
@@ -242,10 +243,6 @@ h3 {
     width:100%;
     background: #000;
     display: none;
-}
-
-#container {
-  padding-top: 5px;
 }
 
 

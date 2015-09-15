@@ -13,7 +13,7 @@ Dashing.on 'ready', ->
     moment.locale(gon.locale)
 
   Dashing.widget_margins ||= [4, 4]
-  Dashing.widget_base_dimensions ||= [298, 338]
+  Dashing.widget_base_dimensions ||= [292, 333]
   Dashing.numColumns ||= 2
 
   contentWidth = (Dashing.widget_base_dimensions[0] + Dashing.widget_margins[0] * 2) * Dashing.numColumns
