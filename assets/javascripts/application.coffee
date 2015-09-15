@@ -8,7 +8,7 @@
 console.log("Yeah! The dashboard has started!")
 
 $ ->
-  FastClick.attach(document.body);
+  FastClick.attach(document.body)
 
 Dashing.on 'ready', ->
   # Setup momentJS locale if locale exists
@@ -23,10 +23,9 @@ Dashing.on 'ready', ->
 
   Batman.setImmediate ->
     $('.gridster').width(contentWidth)
-    $('.gridster ul:first').gridster
+    grid = $('.gridster ul:first').gridster
       widget_margins: Dashing.widget_margins
       widget_base_dimensions: Dashing.widget_base_dimensions
       avoid_overlapped_widgets: !Dashing.customGridsterLayout
-      draggable:
-        stop: Dashing.showGridsterInstructions
-        start: -> Dashing.currentWidgetPositions = Dashing.getWidgetPositions()
+
+    grid.data('gridster').disable()
