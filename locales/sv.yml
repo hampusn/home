@@ -2,3 +2,7 @@ sv:
   widgets:
     elks_single_sms:
       from: "Mottaget från %phone_number"
+
+  jobs:
+    elks_sms_cache:
+      from: "Mottaget från %s"
