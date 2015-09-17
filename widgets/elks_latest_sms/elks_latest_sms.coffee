@@ -1,4 +1,4 @@
-class Dashing.ElksLatestSms extends Dashing.Widget
+class Dashing.ElksLatestSms extends Dashing.ClickableWidget
   constructor: ->
     super
     stored = $storage('elksLatestSms').get();
@@ -19,11 +19,16 @@ class Dashing.ElksLatestSms extends Dashing.Widget
       latest = new Date(data.items[0].time)
 
       if latest > current
-        console.log('NEW MESSAGES');
         stored.hasNewMessages = true
       
     if stored.hasNewMessages
-      console.log('SHOW ALERT')
+      $(@node).addClass('notice')
     
     stored.latestTime = data.items[0].time
     $storage('elksLatestSms').set(stored);
+
+  onTap: (event) ->
+    stored = $storage('elksLatestSms').get();
+    stored.hasNewMessages = false
+    $storage('elksLatestSms').set(stored);
+    $(@node).removeClass('notice')
