@@ -2,8 +2,8 @@
   <li class="message" data-foreach-item="items">
     <p class="message__text" data-bind="item.message"></p>
     <small class="message__meta">
-      <span class="message__from" data-bind="item.from"></span>,
-      <span class="message_time" data-bind="item.time"></span>
+      <span class="message__from" data-bind="item.from_formatted"></span>,
+      <span class="message_time" data-bind="item.time_formatted"></span>
     </small>
   </li>
 </ul>

@@ -22,6 +22,8 @@ configure do
   I18n.backend.load_translations
   I18n.enforce_available_locales = false
 
+  set :default_locale, 'en'
+  set :locale, ENV['LOCALE'] || settings.default_locale
 
   helpers do
     def protected!
@@ -33,11 +35,8 @@ end
 
 before '/:dashboard' do
   if params[:dashboard] == 'index'
-    locale = ENV['LOCALE'] || 'en'
-    I18n.default_locale = 'en'
-    I18n.locale = locale
-
-    gon.locale = locale
+    
+    gon.locale = settings.locale
 
     # Localization strings for widgets
     gon.widgets = {

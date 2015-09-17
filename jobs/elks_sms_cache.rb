@@ -4,9 +4,13 @@ require 'json'
 require 'time'
 
 # URI to SMS cache endpoint
-cache_uri = URI(ENV['ELKS_SINGLE_SMS_CACHE_URI'] || 'http://user:pass@localhost:5000/sms?channel=test-channel&n=5')
+cache_uri = URI(ENV['ELKS_SMS_CACHE_URI'] || 'http://user:pass@localhost:5000/sms?channel=test-channel&n=5')
 
 SCHEDULER.every '10s', :first_in => 0 do |job|
+  # Setup i18n
+  I18n.default_locale = settings.default_locale
+  I18n.locale = settings.locale
+
   # Create request
   req = Net::HTTP::Get.new(cache_uri)
   # Set Basic Auth from cache uri
@@ -20,11 +24,21 @@ SCHEDULER.every '10s', :first_in => 0 do |job|
     json_response = JSON.parse(res.body)
 
     items = json_response['items']
-    to = items[0]['to']
+    first = items[0]
+
+    to = first['to']
 
     items.each { |item|
       item['time'] = Time.parse(item['created_at'])
+      item['from_formatted'] = sprintf I18n.t('jobs.elks_sms_cache.from'), item['from']
     } 
+
+    send_event('elks_single_sms', {
+      message: first['message'],
+      from: first['from'],
+      to: first['to'],
+      time: first['time']
+    });
 
     send_event('elks_latest_sms', {
       items: items,
