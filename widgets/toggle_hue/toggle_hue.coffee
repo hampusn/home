@@ -1,23 +1,23 @@
 class Dashing.ToggleHue extends Dashing.ClickableWidget
   constructor: ->
     super
+    @updateState();
 
   @accessor 'state',
     get: -> @_state ? 'off'
     set: (key, value) -> @_state = value
 
-  getState: ->
+  updateState: ->
     $.get '/hue/state',
       (data) =>
-        console.log(data);
-        # json = JSON.parse data
-        # @set 'state', json.switch
+        if data.status == 'success'
+          @set 'state', data.state
 
   setState: (newState) ->
     $.post '/hue/state',
       new_state: newState,
       (data) =>
-        console.log(data);
+        @updateState();
 
   ready: ->
     # This is fired when the widget is done being rendered

@@ -26,8 +26,6 @@ SCHEDULER.every '10s', :first_in => 0 do |job|
     items = json_response['items']
     first = items[0]
 
-    to = first['to']
-
     items.each { |item|
       item['time'] = Time.parse(item['created_at'])
       item['from_formatted'] = sprintf I18n.t('jobs.elks_sms_cache.from'), item['from']
@@ -36,13 +34,11 @@ SCHEDULER.every '10s', :first_in => 0 do |job|
     send_event('elks_single_sms', {
       message: first['message'],
       from: first['from'],
-      to: first['to'],
       time: first['time']
     });
 
     send_event('elks_latest_sms', {
-      items: items,
-      to: to
+      items: items
     });
   end
 end

@@ -21,6 +21,8 @@ $moreinfo-color:    rgba(255, 255, 255, 0.7);
 .widget-elks-latest-sms {
   background-color: $background-color;
   position: relative;
+  
+  transition: background-color .3s ease-in-out; // I only need it for chrome anyways.
 
   .messages {
     font-size: 1.1em; 
@@ -43,14 +45,6 @@ $moreinfo-color:    rgba(255, 255, 255, 0.7);
         font-size: elks-latest-sms-message-font-size($i);
       }
     }
-  
-  .to {
-    color: rgba(255, 255, 255, 0.6);
-    font-size: 0.6em; 
-    position: absolute;
-    right: 0.5em;
-    top: 0.5em;
-  }
 
   .updated-at {
     color: rgba(255, 255, 255, 0.7);
