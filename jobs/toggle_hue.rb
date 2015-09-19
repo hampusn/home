@@ -19,6 +19,9 @@ get '/hue/state' do
     state = 'off'
   end
 
+  send_event('toggle_hue', {
+    state: state
+  });
   {:status => "success", :state => state}.to_json
 end
 
@@ -37,17 +40,4 @@ post '/hue/state' do
   end
 
   {:status => "success"}.to_json
-end
-
-# :first_in sets how long it takes before the job is first run. In this case, it is run immediately
-SCHEDULER.every '5s', :first_in => 0 do |job|
-  if group_is_on?
-    state = 'on'
-  else
-    state = 'off'
-  end
-
-  send_event('toggle_hue', {
-    state: state
-  });
 end
