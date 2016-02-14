@@ -10,7 +10,7 @@ class Dashing.ElksLatestSms extends Dashing.ClickableWidget
 
   onData: (data) =>
     for item in data.items
-      item.time_formatted = moment(item.time).calendar()
+      item.time_formatted = moment(item.created_at).calendar()
 
     stored = $storage('elksLatestSms').get()
 

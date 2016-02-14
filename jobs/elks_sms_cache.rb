@@ -23,17 +23,24 @@ SCHEDULER.every '10s', :first_in => 0 do |job|
   if res && res.body
     json_response = JSON.parse(res.body)
 
-    items = json_response['items']
+    items = json_response
     first = items[0]
 
     items.each { |item|
       item['time'] = Time.parse(item['created_at'])
-      item['from_formatted'] = sprintf I18n.t('jobs.elks_sms_cache.from'), item['from']
+
+      metas = Hash.new;
+      item['meta'].each do |meta|
+        metas[meta['key']] = meta['value'];
+      end
+      item['meta'] = metas;
+
+      item['from_formatted'] = sprintf I18n.t('jobs.elks_sms_cache.from'), item['meta']['from']
     } 
 
     send_event('elks_single_sms', {
       message: first['message'],
-      from: first['from'],
+      from: first['meta']['from'],
       time: first['time']
     });
 
