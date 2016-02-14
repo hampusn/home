@@ -9,3 +9,7 @@ sv:
   jobs:
     elks_sms_cache:
       from: "Mottaget från %s"
+
+    newly_added_shows:
+      season: "Säsong %s"
+      episode: "Avsnitt %s"

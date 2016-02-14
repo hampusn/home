@@ -9,3 +9,7 @@ en:
   jobs:
     elks_sms_cache:
       from: "Recieved from %s"
+
+    newly_added_shows:
+      season: "Season %s"
+      episode: "Episode %s"

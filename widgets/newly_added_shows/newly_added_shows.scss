@@ -1,0 +1,61 @@
+// ----------------------------------------------------------------------------
+// Sass declarations
+// ----------------------------------------------------------------------------
+$background-color:          #666;
+$background-color-notice:   #12b0c5;
+
+
+$title-color:       rgba(255, 255, 255, 0.7);
+$moreinfo-color:    rgba(255, 255, 255, 0.7);
+
+// ----------------------------------------------------------------------------
+// Sass declarations
+// ----------------------------------------------------------------------------
+@function elks-latest-sms-message-font-size($i) {
+  @return 1em - 0.1em * ($i - 1) * 0.5 * $i;
+}
+
+// ----------------------------------------------------------------------------
+// widget-newly-added-shows styles
+// ----------------------------------------------------------------------------
+.widget-newly-added-shows {
+  background-color: $background-color;
+  position: relative;
+  
+  transition: background-color .3s ease-in-out; // I only need it for chrome anyways.
+
+  .episodes-list {
+
+  }
+
+  .episode {
+    margin-bottom: 0.4em;
+  }
+
+  .episode__show {
+    line-height: 1.1;
+  }
+  .episode__metas {
+    font-size: 0.7em;
+    opacity: 0.4;
+  }
+  .episode__meta {
+    display: inline-block;
+  }
+
+  .episode__meta--season {}
+  .episode__meta--episode {}
+  .episode__meta--air-date {}
+
+
+  .updated-at {
+    color: rgba(255, 255, 255, 0.7);
+  }
+}
+
+// ----------------------------------------------------------------------------
+// States
+// ----------------------------------------------------------------------------
+.widget-newly-added-shows.notice {
+  background-color: $background-color-notice;
+}

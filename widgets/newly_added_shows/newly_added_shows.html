@@ -1,0 +1,13 @@
+<ul class="episodes-list">
+  <li class="episode" data-foreach-item="items">
+    <p class="episode__show" data-bind="item.meta.show"></p>
+
+    <ul class="episode__metas">
+      <li class="episode__meta episode__meta--season"><span data-bind="item.meta.season_formatted"></span></li>
+      <li class="episode__meta episode__meta--episode"><span data-bind="item.meta.episode_formatted"></span></li>
+      <li class="episode__meta episode__meta--air-date"><span data-bind="item.meta.air_date"></span></li>
+    </ul>
+  </li>
+</ul>
+
+<p class="updated-at" data-bind="updatedAtMessage"></p>
