@@ -37,9 +37,13 @@ before '/:dashboard' do
   if params[:dashboard] == 'index'
     
     gon.locale = settings.locale
+    I18n.locale = settings.locale
 
     # Localization strings for widgets
     gon.widgets = {
+      i18n_widget: {
+        updated_at: I18n.t('widgets.i18n_widget.updated_at')
+      },
       elks_single_sms: {
         from: I18n.t('widgets.elks_single_sms.from')
       }

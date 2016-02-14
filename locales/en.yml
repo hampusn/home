@@ -1,5 +1,8 @@
 en:
   widgets:
+    i18n_widget:
+      updated_at: "Last updated at %h:%m"
+
     elks_single_sms:
       from: "Recieved from %phone_number"
 

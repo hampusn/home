@@ -1,5 +1,8 @@
 sv:
   widgets:
+    i18n_widget:
+      updated_at: "Senast uppdaterad %h:%m"
+
     elks_single_sms:
       from: "Mottaget från %phone_number"
 
