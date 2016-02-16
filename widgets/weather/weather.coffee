@@ -1,4 +1,4 @@
-class Dashing.Weather extends Dashing.Widget
+class Dashing.Weather extends Dashing.I18nWidget
 
   ready: ->
     # This is fired when the widget is done being rendered

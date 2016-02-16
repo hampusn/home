@@ -12,14 +12,19 @@ woe_id = ENV['WEATHER_WIDGET_WOE_ID'] || 894423
 format = ENV['WEATHER_WIDGET_FORMAT'] || 'c'
  
 SCHEDULER.every '1s', :first_in => 0 do |job|
-  http = Net::HTTP.new('weather.yahooapis.com')
-  response = http.request(Net::HTTP::Get.new("/forecastrss?w=#{woe_id}&u=#{format}"))
-  weather_data = XmlSimple.xml_in(response.body, { 'ForceArray' => false })['channel']['item']['condition']
-  weather_location = XmlSimple.xml_in(response.body, { 'ForceArray' => false })['channel']['location']
-  send_event('weather', { :temp => "#{weather_data['temp']}&deg;#{format.upcase}",
-                          :condition => weather_data['text'],
-                          :title => "#{weather_location['city']}",
-                          :climacon => climacon_class(weather_data['code'])})
+  begin  
+    http = Net::HTTP.new('weather.yahooapis.com')
+    response = http.request(Net::HTTP::Get.new("/forecastrss?w=#{woe_id}&u=#{format}"))
+    weather_data = XmlSimple.xml_in(response.body, { 'ForceArray' => false })['channel']['item']['condition']
+    weather_location = XmlSimple.xml_in(response.body, { 'ForceArray' => false })['channel']['location']
+    send_event('weather', { :temp => "#{weather_data['temp']}&deg;#{format.upcase}",
+                            :condition => weather_data['text'],
+                            :title => "#{weather_location['city']}",
+                            :climacon => climacon_class(weather_data['code']),
+                            :error => ""})
+  rescue StandardError => e
+    send_event('weather', {error: e.message})
+  end
 end
 
 
