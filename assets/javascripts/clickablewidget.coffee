@@ -10,9 +10,9 @@ class Dashing.ClickableWidget extends Dashing.Widget
   @accessor 'updatedAtMessage', ->
     if updatedAt = @get('updatedAt')
       timestamp = new Date(updatedAt * 1000)
-      hours = timestamp.getHours()
+      hours = ("0" + timestamp.getHours()).slice(-2)
       minutes = ("0" + timestamp.getMinutes()).slice(-2)
-      gon.widgets.i18n_widget.updated_at.replace("%h", hours).replace("%m", minutes)
+      "#{hours}:#{minutes}"
 
   handleClick: (evt) ->
     @onClick evt
