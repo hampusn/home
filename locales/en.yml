@@ -10,6 +10,10 @@ en:
     elks_sms_cache:
       from: "Recieved from %s"
 
+    toggle_hue:
+      errors:
+        no_bridge_found: "No bridge found"
+
     newly_added_shows:
       season: "Season %s"
       episode: "Episode %s"
