@@ -7,6 +7,10 @@ class Dashing.ClickableWidget extends Dashing.Widget
     $(@node).on 'touchend', (evt) => @handleTouchEnd evt
     $(@node).on 'tap', (evt) => @handleTap evt
 
+  @accessor 'status',
+    get: -> @_status ? ''
+    set: (key, value) -> @_status = value
+
   @accessor 'updatedAtMessage', ->
     if updatedAt = @get('updatedAt')
       timestamp = new Date(updatedAt * 1000)

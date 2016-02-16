@@ -2,6 +2,10 @@ class Dashing.I18nWidget extends Dashing.Widget
   constructor: ->
     super
 
+  @accessor 'status',
+    get: -> @_status ? ''
+    set: (key, value) -> @_status = value
+
   @accessor 'updatedAtMessage', ->
     if updatedAt = @get('updatedAt')
       timestamp = new Date(updatedAt * 1000)
