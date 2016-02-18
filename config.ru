@@ -46,6 +46,9 @@ before '/:dashboard' do
       },
       elks_single_sms: {
         from: I18n.t('widgets.elks_single_sms.from')
+      },
+      newly_added_shows: {
+        formats: I18n.t('widgets.newly_added_shows.formats')
       }
     }
   end

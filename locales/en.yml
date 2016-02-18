@@ -6,6 +6,15 @@ en:
     elks_single_sms:
       from: "Recieved from %phone_number"
 
+    newly_added_shows:
+      formats:
+        sameDay: '[Today]'
+        nextDay: '[Tomorrow]'
+        nextWeek: 'dddd'
+        lastDay: '[Yesterday]'
+        lastWeek: '[Last] dddd'
+        sameElse: 'YYYY-MM-DD'
+
   jobs:
     elks_sms_cache:
       from: "Recieved from %s"

@@ -7,11 +7,18 @@ class Dashing.NewlyAddedShows extends Dashing.ClickableWidget
         "latestTime": "",
         "hasNewMessages": false
       })
+    # Trigger onData with history data to get pretty dates through momemt.js
+    lastData = Dashing.lastEvents[@id]
+    @onData(lastData)
+
+  momentItems: (items) =>
+    for item in items
+      item.meta.air_date = moment(item.meta.air_date, "YYYY-MM-DD").calendar(null, gon.widgets.newly_added_shows.formats)
+    items
 
   onData: (data) =>
-    for item in data.items
-      item.meta.air_date = moment(item.meta.air_date).calendar()
-      
+    @momentItems(data.items)
+    
     stored = $storage('newlyAddedShows').get()
 
     if !!stored.latestTime

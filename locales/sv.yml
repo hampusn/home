@@ -6,6 +6,15 @@ sv:
     elks_single_sms:
       from: "Mottaget från %phone_number"
 
+    newly_added_shows:
+      formats:
+        sameDay: '[Idag]'
+        nextDay: '[Imorgon]'
+        lastDay: '[Igår]'
+        nextWeek: '[På] dddd'
+        lastWeek: '[I] dddd[s]'
+        sameElse: 'YYYY-MM-DD'
+
   jobs:
     elks_sms_cache:
       from: "Mottaget från %s"

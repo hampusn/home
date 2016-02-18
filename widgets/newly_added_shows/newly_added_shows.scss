@@ -45,6 +45,9 @@ $moreinfo-color:    rgba(255, 255, 255, 0.7);
 
   .episode__meta--season {}
   .episode__meta--episode {}
+  .episode__meta--episode:after {
+      content: ",";
+  }
   .episode__meta--air-date {}
 
 
