@@ -21,25 +21,26 @@ class Dashing.NewlyAddedShows extends Dashing.ClickableWidget
       items
 
   onData: (data) =>
-    @momentItems(data.items)
-    
-    stored = $storage('newlyAddedShows').get()
-
-    if stored?.latestTime?
-      current = new Date(stored.latestTime)
-      latest = new Date(data.items[0].time)
-
-      if latest > current
-        stored.hasNewMessages = true
+    if data?.items?
+      @momentItems(data.items)
       
-    if stored.hasNewMessages
-      $(@node).addClass('notice')
-    
-    stored.latestTime = data.items[0].time
-    $storage('newlyAddedShows').set(stored);
+      stored = $storage('newlyAddedShows').get()
+
+      if stored?.latestTime?
+        current = new Date(stored.latestTime)
+        latest = new Date(data.items[0].time)
+
+        if latest > current
+          stored.hasNewMessages = true
+        
+      if stored.hasNewMessages
+        $(@node).addClass('notice')
+      
+      stored.latestTime = data.items[0].time
+      $storage('newlyAddedShows').set(stored)
 
   onTap: (event) ->
-    stored = $storage('newlyAddedShows').get();
+    stored = $storage('newlyAddedShows').get()
     stored.hasNewMessages = false
-    $storage('newlyAddedShows').set(stored);
+    $storage('newlyAddedShows').set(stored)
     $(@node).removeClass('notice')
