@@ -27,8 +27,20 @@ configure do
 
   helpers do
     def protected!
-     # Put any authentication code you want in here.
-     # This method is run before accessing any resource.
+      unless authorized?
+        response['WWW-Authenticate'] = %(Basic realm="Authentication required.")
+        throw(:halt, [401, "Oops... we need your login name & password\n"])
+      end
+    end
+
+    def authorized?
+      @auth ||=  Rack::Auth::Basic::Request.new(request.env)
+
+      unless ENV['ACCESS_AUTH'].empty?
+        access_auth = ENV['ACCESS_AUTH'].unpack("m*").first.split(/:/, 2)
+      end
+
+      @auth.provided? && @auth.basic? && @auth.credentials && @auth.credentials == access_auth
     end
   end
 end
