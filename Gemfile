@@ -12,7 +12,6 @@ gem 'gon-sinatra'
 gem 'xml-simple'
 
 ## Used for controlling the Philips Hue lamps
-gem 'hue'
 gem 'huey'
 
 ## Remove this if you don't need a twitter widget.
