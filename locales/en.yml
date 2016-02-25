@@ -26,3 +26,14 @@ en:
     newly_added_shows:
       season: "Season %s"
       episode: "Episode %s"
+
+    hue_switches:
+      status:
+        press_link_button: "Press the link button and try your request again"
+        no_bridge_found: "No bridge found"
+        bridge_connection: "Connected to bridge"
+
+      state:
+        disconnected: "Disconnected"
+        turn_off: "Off"
+        turn_on: "On"

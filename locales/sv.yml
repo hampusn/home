@@ -26,3 +26,14 @@ sv:
     newly_added_shows:
       season: "Säsong %s"
       episode: "Avsnitt %s"
+
+    hue_switches:
+      status:
+        press_link_button: "Tryck på sync-knappen och försök igen"
+        no_bridge_found: "Ingen Hue-brygga funnen"
+        bridge_connection: "Ansluten till brygga"
+
+      state:
+        disconnected: "Ej ansluten"
+        turn_off: "Släck"
+        turn_on: "Tänd"
