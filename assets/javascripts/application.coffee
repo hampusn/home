@@ -12,9 +12,19 @@ Dashing.on 'ready', ->
   if moment && gon.locale
     moment.locale(gon.locale)
 
-  Dashing.widget_margins ||= [4, 4]
-  Dashing.widget_base_dimensions ||= [292, 333]
-  Dashing.numColumns ||= 2
+  settings = $('.gridster').data('layout')
+  w = $(window).width()
+  h = $(window).height()
+
+  widgetWidth = (w - (settings.cols * settings.margin.x * 2)) / settings.cols
+  widgetHeight = (h - (settings.rows * settings.margin.y * 2)) / settings.rows
+
+  widgetWidth = Math.floor(widgetWidth)
+  widgetHeight = Math.floor(widgetHeight)
+
+  Dashing.widget_margins ||= [settings.margin.x, settings.margin.y]
+  Dashing.widget_base_dimensions ||= [widgetWidth, widgetHeight]
+  Dashing.numColumns ||= settings.cols
 
   contentWidth = (Dashing.widget_base_dimensions[0] + Dashing.widget_margins[0] * 2) * Dashing.numColumns
 
