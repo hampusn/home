@@ -6,7 +6,7 @@ require 'time'
 # URI to SMS cache endpoint
 cache_uri = URI(ENV['NEWLY_ADDED_SHOWS_CACHE_URI'] || 'http://user:pass@localhost:5000/sms?channel=test-channel&n=5')
 
-SCHEDULER.every '5m', :first_in => 0 do |job|
+SCHEDULER.every '5m', :first_in => '5s' do |job|
   # Setup i18n
   I18n.default_locale = settings.default_locale
   I18n.locale = settings.locale
