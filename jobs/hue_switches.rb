@@ -11,6 +11,33 @@ Huey.configure do |config|
 end
 
 
+SCHEDULER.every '5s' do |job|
+  # Setup i18n
+  I18n.default_locale = settings.default_locale
+  I18n.locale = settings.locale
+
+  result = {
+    status: I18n.t('jobs.hue_switches.status.bridge_connection'),
+    connectivity: true
+  }
+
+  begin
+    Huey::Bulb.all.reload
+    result[:state] = state_text_on(group_state)
+  rescue Huey::Errors::Error => e
+    result = {
+      status: e.message,
+      state: I18n.t('jobs.hue_switches.state.disconnected'),
+      connectivity: false
+    }
+  end
+
+  if result[:connectivity]
+    send_event('hue_switches', result)
+  end
+end
+
+
 post '/hue-switches/register' do
   content_type :json
 
@@ -44,6 +71,7 @@ post '/hue-switches/register' do
   {status: "success"}.to_json
 end
 
+
 post '/hue-switches/status' do
   content_type :json
 
@@ -57,7 +85,7 @@ post '/hue-switches/status' do
   }
 
   begin
-    bulbs = Huey::Bulb.all
+    bulbs = Huey::Bulb.all.reload
     result[:num_bulbs] = bulbs.length
     result[:state] = state_text_on(group_state)
   rescue Huey::Errors::Error => e
@@ -71,6 +99,7 @@ post '/hue-switches/status' do
   send_event('hue_switches', result)
   {status: "success"}.to_json
 end
+
 
 post '/hue-switches/toggle' do
   content_type :json
@@ -95,6 +124,7 @@ post '/hue-switches/toggle' do
   send_event('hue_switches', result);
   {status: "success"}.to_json
 end
+
 
 def group_state
   Huey::Bulb.all.on.all? && Huey::Bulb.find(1).on
