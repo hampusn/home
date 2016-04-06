@@ -1,11 +1,11 @@
-<small class="status-message" data-bind="status"></small>
+<small class="status-message" data-bind="now.status"></small>
 
 <i class="climacon icon-background"></i>
-<h1 class="title" data-bind="title"></h1>
+<h1 class="title" data-bind="now.title"></h1>
  
-<h2 class="temp" data-bind="temp | raw"></h2>
+<h2 class="temp" data-bind="now.temp | raw"></h2>
  
-<p class="condition" data-bind="condition"></p>
+<p class="condition" data-bind="now.condition"></p>
  
 <p class="updated-at">
   <i class="icon-refresh"></i>
