@@ -36,6 +36,8 @@ def weather_hash(item)
   {
     temp: "#{item['t']}&deg;C",
     condition: weather_category(item['pcat']),
+    percipitation: item['pit'],
+    showPercipitation: (item['pcat'] >= 2 || item['pcat'] <= 6),
     title: "Jönköping",
     climacon: climacon_class(item['pcat']),
     error: ""  
