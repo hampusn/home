@@ -26,6 +26,7 @@ en:
     newly_added_shows:
       season: "Season %s"
       episode: "Episode %s"
+      movie: "Movie"
 
     hue_switches:
       status:

@@ -5,6 +5,7 @@ require 'time'
 
 # URI to SMS cache endpoint
 cache_uri = URI(ENV['NEWLY_ADDED_SHOWS_CACHE_URI'] || 'http://user:pass@localhost:5000/sms?channel=test-channel&n=5')
+limit_num = 10
 
 SCHEDULER.every '5m', :first_in => '5s' do |job|
   # Setup i18n
@@ -25,7 +26,15 @@ SCHEDULER.every '5m', :first_in => '5s' do |job|
 
     items = json_response
 
-    items.each { |item|
+    # Filter out items where message starts with "Found ".
+    items = items.select do |item|
+      !item['message'].start_with?('Found ')
+    end
+
+    # Slice out the first num items.
+    items = items.take(limit_num)
+
+    items.each do |item|
       item['time'] = Time.parse(item['created_at'])
 
       metas = Hash.new;
@@ -34,9 +43,18 @@ SCHEDULER.every '5m', :first_in => '5s' do |job|
       end
       item['meta'] = metas;
 
+      if item['meta']['notifier'] == 'couchpotato'
+        if item['message'].start_with?('Downloaded ')
+          item['message'].slice! 'Downloaded '
+        end
+        item['meta']['movie'] = I18n.t('jobs.newly_added_shows.movie')
+      else
+        item['message'] = item['meta']['show']
+      end
+
       item['meta']['season_formatted'] = sprintf I18n.t('jobs.newly_added_shows.season'), item['meta']['season']
       item['meta']['episode_formatted'] = sprintf I18n.t('jobs.newly_added_shows.episode'), item['meta']['episode']
-    } 
+    end
 
     send_event('newly_added_shows', {
       items: items

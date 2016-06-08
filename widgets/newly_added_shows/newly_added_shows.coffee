@@ -15,9 +15,10 @@ class Dashing.NewlyAddedShows extends Dashing.ClickableWidget
   momentItems: (items) =>
     if items?
       for item in items
-        m = moment(item.meta.air_date, "YYYY-MM-DD")
-        if m?.isValid
-          item.meta.air_date = m.calendar(null, gon.widgets.newly_added_shows.formats)
+        if item.meta.air_date?
+          m = moment(item.meta.air_date, "YYYY-MM-DD")
+          if m?.isValid
+            item.meta.air_date = m.calendar(null, gon.widgets.newly_added_shows.formats)
       items
 
   onData: (data) =>

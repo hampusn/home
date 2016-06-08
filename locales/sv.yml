@@ -26,6 +26,7 @@ sv:
     newly_added_shows:
       season: "Säsong %s"
       episode: "Avsnitt %s"
+      movie: "Film"
 
     hue_switches:
       status:

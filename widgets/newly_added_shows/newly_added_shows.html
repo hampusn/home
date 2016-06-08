@@ -2,12 +2,24 @@
 
 <ul class="episodes-list">
   <li class="episode" data-foreach-item="items">
-    <p class="episode__show" data-bind="item.meta.show"></p>
+    <p class="episode__show" data-bind="item.message"></p>
 
     <ul class="episode__metas">
-      <li class="episode__meta episode__meta--season"><span data-bind="item.meta.season_formatted"></span></li>
-      <li class="episode__meta episode__meta--episode"><span data-bind="item.meta.episode_formatted"></span></li>
-      <li class="episode__meta episode__meta--air-date"><span data-bind="item.meta.air_date"></span></li>
+      <li class="episode__meta episode__meta--season" data-showif="item.meta.season">
+        <span data-bind="item.meta.season_formatted"></span>
+      </li>
+
+      <li class="episode__meta episode__meta--episode" data-showif="item.meta.episode">
+        <span data-bind="item.meta.episode_formatted"></span>
+      </li>
+
+      <li class="episode__meta episode__meta--air-date" data-showif="item.meta.air_date">
+        <span data-bind="item.meta.air_date"></span>
+      </li>
+
+      <li class="episode__meta episode__meta--movie" data-showif="item.meta.movie">
+        <span data-bind="item.meta.movie"></span>
+      </li>
     </ul>
   </li>
 </ul>
