@@ -36,7 +36,6 @@ end
 
 def find_weather_param_value_by_name(parameters, name)
   p = parameters.find { |param| param["name"] == name }
-  puts p
   p['values'][0]
 end
 
