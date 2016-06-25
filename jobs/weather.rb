@@ -5,6 +5,8 @@ require 'time'
 
 weather_uri = URI(ENV['WEATHER_URI'] || '')
 
+# SMHI API DOCS: http://opendata.smhi.se/apidocs/metfcst/parameters.html
+
  
 SCHEDULER.every '10m', :first_in => 0 do |job|
   # Setup i18n
@@ -22,7 +24,7 @@ SCHEDULER.every '10m', :first_in => 0 do |job|
   if res && res.body
     weather_data = JSON.parse(res.body)
 
-    timeseries = weather_data['timeseries']
+    timeseries = weather_data['timeSeries']
 
     closest = find_item_closest_to_date(timeseries, Time.now.utc.iso8601)
 
@@ -32,14 +34,24 @@ SCHEDULER.every '10m', :first_in => 0 do |job|
   end
 end
 
+def find_weather_param_value_by_name(parameters, name)
+  p = parameters.find { |param| param["name"] == name }
+  puts p
+  p['values'][0]
+end
+
 def weather_hash(item)
+  temp          = find_weather_param_value_by_name(item['parameters'], 't')
+  condition     = find_weather_param_value_by_name(item['parameters'], 'pcat')
+  precipitation = find_weather_param_value_by_name(item['parameters'], 'pmax')
+
   {
-    temp: "#{item['t']}&deg;C",
-    condition: weather_category(item['pcat']),
-    percipitation: item['pit'],
-    showPercipitation: (item['pcat'] >= 2 || item['pcat'] <= 6),
+    temp: "#{temp}&deg;C",
+    condition: weather_category(condition),
+    precipitation: precipitation,
+    showPrecipitation: (condition >= 2 || condition <= 6),
     title: "Jönköping",
-    climacon: climacon_class(item['pcat']),
+    climacon: climacon_class(condition),
     error: ""  
   }
 end
