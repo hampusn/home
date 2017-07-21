@@ -30,6 +30,12 @@ SCHEDULER.every '5s' do |job|
       state: I18n.t('jobs.hue_switches.state.disconnected'),
       connectivity: false
     }
+  rescue StandardError => e
+    result = {
+      status: I18n.t('jobs.hue_switches.status.generic_error'),
+      state: I18n.t('jobs.hue_switches.state.disconnected'),
+      connectivity: false
+    }
   end
 
   if result[:connectivity]
@@ -65,6 +71,12 @@ post '/hue-switches/register' do
       state: I18n.t('jobs.hue_switches.state.disconnected'),
       connectivity: false
     }
+  rescue StandardError => e
+    result = {
+      status: I18n.t('jobs.hue_switches.status.generic_error'),
+      state: I18n.t('jobs.hue_switches.state.disconnected'),
+      connectivity: false
+    }
   end
 
   send_event('hue_switches', result);
@@ -94,6 +106,12 @@ post '/hue-switches/status' do
       state: I18n.t('jobs.hue_switches.state.disconnected'),
       connectivity: false
     }
+  rescue StandardError => e
+    result = {
+      status: I18n.t('jobs.hue_switches.status.generic_error'),
+      state: I18n.t('jobs.hue_switches.state.disconnected'),
+      connectivity: false
+    }
   end
 
   send_event('hue_switches', result)
@@ -119,6 +137,12 @@ post '/hue-switches/toggle' do
       state: I18n.t('jobs.hue_switches.state.disconnected'),
       connectivity: false
     }
+  rescue StandardError => e
+    result = {
+      status: I18n.t('jobs.hue_switches.status.generic_error'),
+      state: I18n.t('jobs.hue_switches.state.disconnected'),
+      connectivity: false
+    }
   end
 
   send_event('hue_switches', result);
@@ -127,7 +151,7 @@ end
 
 
 def group_state
-  Huey::Bulb.all.on.all? && Huey::Bulb.find(1).on
+  Huey::Bulb.all.length > 0 && Huey::Bulb.all.on.all? && Huey::Bulb.find(1).on
 end
 
 

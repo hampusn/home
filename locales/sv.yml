@@ -30,6 +30,7 @@ sv:
 
     hue_switches:
       status:
+        generic_error: "Något tråkigt har hänt"
         press_link_button: "Tryck på sync-knappen och försök igen"
         no_bridge_found: "Ingen Hue-brygga funnen"
         bridge_connection: "Ansluten till brygga"
